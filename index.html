@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <style>
+        table {
+            border-collapse:collapse;
+            table-layout:fixed;
+            word-break:break-all; 
+        }
+        th, td {
+			border:0.5px solid grey;
+		}
+    </style>
+    <head>
+        <meta charset="UTF-8">
+        <title>E3-VITS</title>
+    </head>
+    <body>
+        <h1>Audio Samples from "E3-VITS: Emotional End-to-End TTS with Cross-speaker Style Transfer"</h1>
+        <div><p><b>Paper: </b>E3-VITS: Emotional End-to-End TTS with Cross-speaker Style Transfer</p></div>
+        <div><p><b>Abstract: </b>Since previous emotional TTS models are based on a two-stage pipeline or additional labels, their training process is complex and requires a high labeling cost. To deal with this problem, this paper presents E3-VITS, an end-to-end emotional TTS model that addresses the limitations of existing models. E3-VITS synthesizes high-quality speeches for multi-speaker conditions, supports both reference speech and textual description-based emotional speech synthesis, and enables cross-speaker emotion transfer with a disjoint dataset. To implement E3-VITS, we propose batch-permuted style perturbation, which generates audio samples with unpaired emotion to increase the quality of cross-speaker emotion transfer. Results show that E3-VITS outperforms the baseline model in terms of naturalness, speaker and emotion similarity, and inference speed. </p></div>
+        
+		<img src="demo_samples/figure1_overview.png" alt="model overview" width="50%">
+		
+		<h2>1. Ground Truth Samples</h2>
+		We utilize <b>FSNR0 Korean Style Tagging TTS dataset</b> which includes speech recordings, transcriptions, emotional category, and style tags.<br>
+		These are the speech recordings with their correspoding emotional categories and Korean style tags. We add <b>English translations</b> of style tags for understanding.<br>
+		<h4>Neutral source dataset samples</h4>
+		<table>
+            <thead>
+                <tr>
+                    <th colspan=2 width=200px>Emotional categories: NEUTRAL</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border-right: none;"><div align="center"><p>Style tag : #지문(normally)</p><audio controls=""><source src="demo_samples/1/F0001_002926.wav" type="audio/wav"></audio></div></td>
+                    <td style="border-left: none;"><div align="center"><p>Style tag : #지문(normally)</p><audio controls=""><source src="demo_samples/1/M0001_001348.wav" type="audio/wav"></audio></div></td>
+                </tr>
+            </tbody>
+        </table>
+		
+		
+		<h4>Emotional target dataset samples</h4>
+		<table>
+            <thead>
+                <tr>
+                    <th colspan=2 width=200px>Emotional categories: ANGRY</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border-right: none;"><div align="center"><p>Style tag : #짜증난듯(annoyed)</p><audio controls=""><source src="demo_samples/1/F0004_012401.wav" type="audio/wav"></audio></div></td>
+                    <td style="border-left: none;"><div align="center"><p>Style tag : #화가난듯(seem angry)</p><audio controls=""><source src="demo_samples/1/M0004_012583.wav" type="audio/wav"></audio></div></td>
+                </tr>
+            </tbody>
+            <thead>
+                <tr>
+                    <th colspan=2 width=200px>Emotional categories: JOY</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border-right: none;"><div align="center"><p>Style tag : #행복한듯(happy)</p><audio controls=""><source src="demo_samples/1/F0004_014904.wav" type="audio/wav"></audio></div></td>
+                    <td style="border-left: none;"><div align="center"><p>Style tag : #반가운듯(welcoming)</p><audio controls=""><source src="demo_samples/1/M0004_015123.wav" type="audio/wav"></audio></div></td>
+                </tr>
+            </tbody>
+            <thead>
+                <tr>
+                    <th colspan=2 width=200px>Emotional categories: SAD</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border-right: none;"><div align="center"><p>Style tag : #억울한듯(feeling unfair)</p><audio controls=""><source src="demo_samples/1/F0004_007063.wav" type="audio/wav"></audio></div></td>
+                    <td style="border-left: none;"><div align="center"><p>Style tag : #울먹이듯(about to cry)</p><audio controls=""><source src="demo_samples/1/M0004_006695.wav" type="audio/wav"></audio></div></td>
+                </tr>
+            </tbody>
+        </table>
+		
+        <h2>2. Style Tag-based Style Transfer</h2>
+        <li>The <b>"Seen" column</b> contains audio samples from emotional target speakers, and the <b>"Unseen" column</b> contains audio samples from neutral source speakers.</li>
+        <li>The <p style="color:blue; display:inline;">blue tags</p> are tags in the dataset, and the <p style="color:red; display:inline;">red tags</p> are newly created tags, which are not in the dataset.</li>
+        <br>
+		
+        <table>
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th colspan=3>Seen</th>
+					<th colspan=3>Unseen</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan=2>1</td>
+                    <td style="border-right: none; border-bottom: none;"><div align="center"><p style="color:blue;">#기진맥진한듯 (exhausted)</p><audio controls=""><source src="demo_samples/2/tag_seen_내일까지 보내주세요._F0001_기진맥진한듯.wav" type="audio/wav"></audio></div></td>
+                    <td style="border-left: none; border-right: none; border-bottom: none;"><div align="center"><p style="color:blue;">#덤덤하게 (flat)</p><audio controls=""><source src="demo_samples/2/tag_seen_내일까지 보내주세요._F0001_덤덤하게.wav" type="audio/wav"></audio></div></td>
+                    <td style="border-left: none; border-bottom: none;"><div align="center"><p style="color:red;">#힘없이 (weakly)</p><audio controls=""><source src="demo_samples/2/tag_unseen_내일까지 보내주세요._F0001_힘없이.wav" type="audio/wav"></audio></div></td>
+                    
+					<td style="border-right: none; border-bottom: none;"><div align="center"><p style="color:blue;">#큰소리로 (louldy)</p><audio controls=""><source src="demo_samples/2/tag_seen_내일까지 보내주세요._F0004_큰소리로.wav" type="audio/wav"></audio></div></td>
+                    <td style="border-left: none; border-right: none; border-bottom: none;"><div align="center"><p style="color:blue;">#냉정하게 (coldly)</p><audio controls=""><source src="demo_samples/2/tag_seen_내일까지 보내주세요._F0004_냉정하게.wav" type="audio/wav"></audio></div></td>
+                    <td style="border-left: none; border-bottom: none;"><div align="center"><p style="color:red;">#힘없이 (weakly)</p><audio controls=""><source src="demo_samples/2/tag_unseen_내일까지 보내주세요._F0004_힘없이.wav" type="audio/wav"></audio></div></td>
+                </tr>
+                <tr>
+                    <td style="border-right: none; border-top: none;"><div align="center"><p style="color:blue;">#친절하게 (kindly)</p><audio controls=""><source src="demo_samples/2/tag_seen_내일까지 보내주세요._F0001_친절하게.wav" type="audio/wav"></audio></div></td>
+                    <td style="border-left: none; border-right: none; border-top: none;"><div align="center"><p style="color:blue;">#다그치긋 (urging)</p><audio controls=""><source src="demo_samples/2/tag_seen_내일까지 보내주세요._F0001_다긋치듯.wav" type="audio/wav"></audio></div></td>
+                    <td style="border-left: none; border-top: none;"><div align="center"><p style="color:red;">#정답게 (warmly)</p><audio controls=""><source src="demo_samples/2/tag_unseen_내일까지 보내주세요._F0001_정답게.wav" type="audio/wav"></audio></div></td>
+                    
+					<td style="border-right: none; border-top: none;"><div align="center"><p style="color:blue;">#기쁜듯 (happy)</p><audio controls=""><source src="demo_samples/2/tag_seen_내일까지 보내주세요._F0004_기쁜듯.wav" type="audio/wav"></audio></div></td>
+                    <td style="border-left: none; border-right: none; border-top: none;"><div align="center"><p style="color:blue;">#정색하며 (straight face)</p><audio controls=""><source src="demo_samples/2/tag_seen_내일까지 보내주세요._F0004_정색하며.wav" type="audio/wav"></audio></div></td>
+                    <td style="border-left: none; border-top: none;"><div align="center"><p style="color:red;">#활기찬 (lusty)</p><audio controls=""><source src="demo_samples/2/tag_unseen_내일까지 보내주세요._F0004_활기찬.wav" type="audio/wav"></audio></div></td>
+                </tr>
+				
+                <tr>
+                    <td rowspan=2>2</td>
+                    <td style="border-right: none; border-bottom: none;"><div align="center"><p style="color:blue;">#놀란듯 (surprised)</p><audio controls=""><source src="demo_samples/2/tag_seen_누구한테 연락하면 될까요_M0001_놀란듯.wav" type="audio/wav"></audio></div></td>
+                    <td style="border-left: none; border-right: none; border-bottom: none;"><div align="center"><p style="color:blue;">#너그러운 (generous)</p><audio controls=""><source src="demo_samples/2/tag_seen_누구한테 연락하면 될까요_M0001_너그러운.wav" type="audio/wav"></audio></div></td>
+                    <td style="border-left: none; border-bottom: none;"><div align="center"><p style="color:red;">#낙담한듯 (disappointed)</p><audio controls=""><source src="demo_samples/2/tag_unseen_누구한테 연락하면 될까요_M0001_낙담한듯.wav" type="audio/wav"></audio></div></td>
+                    
+					<td style="border-right: none; border-bottom: none;"><div align="center"><p style="color:blue;">#신기한듯 (interesting)</p><audio controls=""><source src="demo_samples/2/tag_seen_누구한테 연락하면 될까요_F0004_신기한듯.wav" type="audio/wav"></audio></div></td>
+                    <td style="border-left: none; border-right: none; border-bottom: none;"><div align="center"><p style="color:blue;">#악을쓰듯 (shouting)</p><audio controls=""><source src="demo_samples/2/tag_seen_누구한테 연락하면 될까요_F0004_악을쓰듯.wav" type="audio/wav"></audio></div></td>
+                    <td style="border-left: none; border-bottom: none;"><div align="center"><p style="color:red;">#높은 목소리로 (high-pitched voice)</p><audio controls=""><source src="demo_samples/2/tag_unseen_누구한테 연락하면 될까요_F0004_높은 목소리로.wav" type="audio/wav"></audio></div></td>
+                </tr>
+                <tr>
+                    <td style="border-right: none; border-top: none;"><div align="center"><p style="color:blue;">#불편한듯 (uncomfortable)</p><audio controls=""><source src="demo_samples/2/tag_seen_누구한테 연락하면 될까요_M0001_불편한듯.wav" type="audio/wav"></audio></div></td>
+                    <td style="border-left: none; border-right: none; border-top: none;"><div align="center"><p style="color:blue;">#수긍하듯 (agreeing)</p><audio controls=""><source src="demo_samples/2/tag_seen_누구한테 연락하면 될까요_M0001_수긍하듯.wav" type="audio/wav"></audio></div></td>
+                    <td style="border-left: none; border-top: none;"><div align="center"><p style="color:red;">#혼란스러운듯 (confused)</p><audio controls=""><source src="demo_samples/2/tag_unseen_누구한테 연락하면 될까요_M0001_혼란스러운듯.wav" type="audio/wav"></audio></div></td>
+                    
+					<td style="border-right: none; border-top: none;"><div align="center"><p style="color:blue;">#억울한듯 (feeling unfair)</p><audio controls=""><source src="demo_samples/2/tag_seen_누구한테 연락하면 될까요_F0004_억울한듯.wav" type="audio/wav"></audio></div></td>
+                    <td style="border-left: none; border-right: none; border-top: none;"><div align="center"><p style="color:blue;">#울먹이듯 (about to cry)</p><audio controls=""><source src="demo_samples/2/tag_seen_누구한테 연락하면 될까요_F0004_울먹이듯.wav" type="audio/wav"></audio></div></td>
+                    <td style="border-left: none; border-top: none;"><div align="center"><p style="color:red;">#낮은 목소리로 (low-pitched voice)</p><audio controls=""><source src="demo_samples/2/tag_unseen_누구한테 연락하면 될까요_F0004_낮은 목소리로.wav" type="audio/wav"></audio></div></td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        
+        <h2>3. Reference Speech-based Style Transfer</h2>
+		<li>The <b>"reference"</b> samples are used as reference speeches from FSNR0, and the <b>"synthesized"</b> samples are generated with style embedding from the reference speeches of correspoding number.</li>
+        <li>We attach style tags of reference speeches to provide more information to listeners. They were not used in actual speech systhesis. </li>
+        <br>
+		
+        <table>
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th colspan=3>Seen</th>
+					<th colspan=3>Unseen</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan=2>1</td>
+                    <td style="border-right: none; border-bottom: none;"><div align="center"><p style="color:black;">reference 1<br>#화가난듯 (seem angry)</p><audio controls=""><source src="demo_samples/3/F0001_5_F0001_100058.wav" type="audio/wav"></audio></div></td>
+                    <td style="border-left: none; border-right: none; border-bottom: none;"><div align="center"><p style="color:black;">reference 2<br>#즐거운듯 (joyful)</p><audio controls=""><source src="demo_samples/3/F0001_2_F0001_101194.wav" type="audio/wav"></audio></div></td>
+                    <td style="border-left: none; border-bottom: none;"><div align="center"><p style="color:black;">reference 3<br>#차분하게 (calm)</p><audio controls=""><source src="demo_samples/3/F0001_4_F0001_101373.wav" type="audio/wav"></audio></div></td>
+                    
+					<td style="border-right: none; border-bottom: none;"><div align="center"><p style="color:black;">reference 1<br>#빈정거리듯 (sarcastic)</p><audio controls=""><source src="demo_samples/3/M0004_3_M0004_011085.wav" type="audio/wav"></audio></div></td>
+                    <td style="border-left: none; border-right: none; border-bottom: none;"><div align="center"><p style="color:black;">reference 2<br>#싫은듯 (disliking)</p><audio controls=""><source src="demo_samples/3/M0004_4_M0004_008271.wav" type="audio/wav"></audio></div></td>
+                    <td style="border-left: none; border-bottom: none;"><div align="center"><p style="color:black;">reference 3<br>#무서운듯 (scared)</p><audio controls=""><source src="demo_samples/3/M0004_5_M0004_018886.wav" type="audio/wav"></audio></div></td>
+                </tr>
+                <tr>
+                    <td style="border-right: none; border-top: none;"><div align="center"><p style="color:black;">synthesized 1</p><audio controls=""><source src="demo_samples/3/ref_손등의 상처는 벌레에게 생긴 것이 아니야._F0001_5.wav" type="audio/wav"></audio></div></td>
+                    <td style="border-left: none; border-right: none; border-top: none;"><div align="center"><p style="color:black;">synthesized 2</p><audio controls=""><source src="demo_samples/3/ref_손등의 상처는 벌레에게 생긴 것이 아니야._F0001_2.wav" type="audio/wav"></audio></div></td>
+                    <td style="border-left: none; border-top: none;"><div align="center"><p style="color:black;">synthesized 3</p><audio controls=""><source src="demo_samples/3/ref_손등의 상처는 벌레에게 생긴 것이 아니야._F0001_4.wav" type="audio/wav"></audio></div></td>
+                    
+					<td style="border-right: none; border-top: none;"><div align="center"><p style="color:black;">synthesized 1</p><audio controls=""><source src="demo_samples/3/ref_손등의 상처는 벌레에게 생긴 것이 아니야._M0004_3.wav" type="audio/wav"></audio></div></td>
+                    <td style="border-left: none; border-right: none; border-top: none;"><div align="center"><p style="color:black;">synthesized 2</p><audio controls=""><source src="demo_samples/3/ref_손등의 상처는 벌레에게 생긴 것이 아니야._M0004_4.wav" type="audio/wav"></audio></div></td>
+                    <td style="border-left: none; border-top: none;"><div align="center"><p style="color:black;">synthesized 3</p><audio controls=""><source src="demo_samples/3/ref_손등의 상처는 벌레에게 생긴 것이 아니야._M0004_5.wav" type="audio/wav"></audio></div></td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
